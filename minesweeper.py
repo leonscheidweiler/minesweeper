@@ -174,6 +174,7 @@ for mine in playing_board.mine_locations:
 #playing_board.print_revealed_to_console()
 
 done = False
+gameover = False
 
 WIDTH = playing_board.pixel_width
 HEIGHT = playing_board.pixel_height
@@ -202,7 +203,11 @@ while not done:
                         clicked_cell.reveal()
                         if clicked_cell.value == 'm':
                             print('You lose!')
-                            done = True
+                            gameover = True
+                            for mine in playing_board.mine_locations:
+                                x = mine[0]
+                                y = mine[1]
+                                playing_board.entries[x][y].reveal()
                         if playing_board.revealed_amount\
                                 == playing_board.horizontal_cell_amount\
                                 *playing_board.vertical_cell_amount\
@@ -252,4 +257,4 @@ while not done:
     pygame.display.flip()
     clock.tick(100)
 
-#pygame.quit()
+pygame.quit()
